@@ -38,6 +38,8 @@ namespace IdentityNetCore
             services.AddDbContext<IdentityContexto>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityContextDB")));
 
+            //Configuracion de Identity
+
             services.AddIdentity<Usuario, Role>()
                    .AddEntityFrameworkStores<IdentityContexto>()
                    .AddDefaultTokenProviders();
@@ -98,7 +100,10 @@ namespace IdentityNetCore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            //Habilita la autenticacion
             app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
